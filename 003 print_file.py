@@ -27,7 +27,9 @@ number    number of lines''')
 
             if '--count' in sys.argv:
                 number = int(sys.argv[sys.argv.index('--count')+1])
-            if '--count' not in sys.argv or number < 0:
+            else:
+                number = len(data)
+            if number < 0:
                 while True:
                     try:
                         number = int(input('Введите положительное количество строк '))
