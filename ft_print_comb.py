@@ -5,25 +5,22 @@ def print_comb():
     result = []
     number = ''
     for i in range(10):
-        for k in range(10):
-            for l in range(10):
-                if i == k or k == l or i == l:
-                    continue
+        for k in range(i+1, 10):
+            for l in range(k+1, 10):
+                number = str(i) + str(k) + str(l)
+                if len(result) == 0:
+                    result.append(number)
                 else:
-                    number = str(i) + str(k) + str(l)
-                    if len(result) == 0:
+                    j = 0
+                    flag = False
+                    while j < len(result):
+                        number_j = result[j]
+                        if str(i) in number_j and str(k) in number_j and str(l) in number_j:
+                            flag = True
+                            break
+                        j += 1
+                    if flag == False:
                         result.append(number)
-                    else:
-                        j = 0
-                        flag = False
-                        while j < len(result):
-                            number_j = result[j]
-                            if str(i) in number_j and str(k) in number_j and str(l) in number_j:
-                                flag = True
-                                break
-                            j += 1
-                        if flag == False:
-                            result.append(number)
 
     for i in range(len(result)):
         if i == len(result)-1:
