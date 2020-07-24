@@ -1,8 +1,12 @@
 # Create a function which, for a given ints array, applies a function on all elements of the array.
 # This function will be applied following the array's order.
 
-def foreach(number):
+def function(number):
     return number**2
+
+def foreach(number_data, f):
+    for i in number_data:
+        print(f(i), end = " ")
 
 def main():
     while True:
@@ -13,13 +17,7 @@ def main():
             continue
         break
 
-    new_data = []
-    for i in data:
-        new_data.append(foreach(i))
-
-    for i in new_data:
-        print(i, end = " ")
-
+    foreach(data, function)
 
 if __name__ == "__main__":
     main()
