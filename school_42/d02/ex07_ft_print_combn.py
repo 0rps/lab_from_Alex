@@ -12,7 +12,6 @@ def print_comb():
         except:
             print("Error. There must be a number. Try again.")
 
-    result = []
     number = ''
     i = 0
 
@@ -20,7 +19,7 @@ def print_comb():
         number += str(i)
         i += 1
 
-    result.append(number)
+    print(number, end="")
 
     pos = 0
     while pos < len(number):
@@ -31,7 +30,7 @@ def print_comb():
             if pos == 0:
                 for j in range(previous_number + 1, 10):
                     number = number[:-1 - pos] + str(j)
-                    result.append(number)
+                    print(", " + number, end="")
                 pos += 1
             else:
                 last_numbers = number[-1 - pos:]
@@ -39,14 +38,8 @@ def print_comb():
                 for j in range(len(last_numbers)):
 
                     number += str(previous_number + j + 1)
-                result.append(number)
-
+                print(", " + number, end="")
                 pos = 0
-
-    for i in result:
-        print(i)
-
-
 
 
 if __name__ == "__main__":
