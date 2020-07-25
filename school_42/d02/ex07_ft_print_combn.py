@@ -36,7 +36,6 @@ def print_comb():
                 last_numbers = number[-1 - pos:]
                 number = number[:-1 - pos]
                 for j in range(len(last_numbers)):
-
                     number += str(previous_number + j + 1)
                 print(", " + number, end="")
                 pos = 0
