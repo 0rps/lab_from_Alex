@@ -10,7 +10,7 @@ def print_comb():
             for l in range(k+1, 10):
                 number = str(i) + str(k) + str(l)
                 if flag:
-                    print(', ' + str(number), end = "")
+                    print(', ' + number, end = "")
                 else:
                     print(number, end = '')
                     flag = True
