@@ -1,27 +1,34 @@
 # Create a function that capitalize the first letter of each word and transforms all other letter to lowercase
 
+
 def is_letter(letter):
-    if letter >= 65 and letter <= 90 or (letter >= 97 and letter <= 122):
+    if letter >= ord('a') and letter <= ord("z") or (letter >= ord("A") and letter <= ord("Z")):
         return True
     else:
         return False
 
+
 def create_capitalize(data_str):
     capitalize_str = ""
     separators = " ,.=+-:;?!&"
+    delta_between_big_and_little_letters = ord("a") - ord("A")
     for i in range(len(data_str)):
         if i == 0:
-            symbol = chr(ord(data_str[i]) - 32)
+            if ord(data_str[i]) >= ord("a") and ord(data_str[i]) <= ord("z"):
+                symbol = chr(ord(data_str[i]) - delta_between_big_and_little_letters)
+            else:
+                symbol = data_str[0]
         elif data_str[i-1] in separators and is_letter(ord(data_str[i])):
-            symbol = chr(ord(data_str[i]) - 32)
+            symbol = chr(ord(data_str[i]) - delta_between_big_and_little_letters)
         else:
-            if is_letter(ord(data_str[i])) and ord(data_str[i]) >= 65 and ord(data_str[i]) <= 90:
-                symbol = chr(ord(data_str[i]) + 32)
+            if is_letter(ord(data_str[i])) and ord(data_str[i]) >= ord("A") and ord(data_str[i]) <= ord("Z"):
+                symbol = chr(ord(data_str[i]) + delta_between_big_and_little_letters)
             else:
                 symbol = data_str[i]
         capitalize_str += symbol
 
     return capitalize_str
+
 
 def main():
     while True:
@@ -32,6 +39,7 @@ def main():
         break
 
     print(create_capitalize(data))
+
 
 if __name__ == "__main__":
     main()
