@@ -24,14 +24,14 @@ def calculate_result(data):
     i = 1
     while i < len(data):
         if data[i] in operators_priority:
-            data[i - 1] = str(calculate(float(data[i - 1]), data[i], float(data[i + 1])))
+            data[i - 1] = calculate(float(data[i - 1]), data[i], float(data[i + 1]))
             del data[i]
             del data[i]
         else:
             i += 2
 
     while 1 < len(data):
-        data[0] = str(calculate(float(data[0]), data[1], float(data[2])))
+        data[0] = calculate(float(data[0]), data[1], float(data[2]))
         del data[1]
         del data[1]
 
@@ -42,33 +42,49 @@ def eval_expr(data):
     operators = "+-*/%"
     i, start, finish, count = 0, 0, 0, 0
     flag = False
+    if data[0] == "-":
+        data[0] = data[0] + data[1]
+        del data[1]
     while i < len(data):
         if not is_number(data[i]) and data[i] not in operators:
             if data[i][0] == "(":
+                position_brackets = 0
+                flag = True
                 if count == 0:
                     start = i
                     data[i] = data[i][1:]
-                count += 1
-                flag = True
+                    count += 1
+                while True:
+                    if data[i][position_brackets] == "(":
+                        count += 1
+                        position_brackets += 1
+                        continue
+                    break
+
             elif data[i][-1] == ")":
-                count -= 1
+                position_brackets = 1
+                while True:
+                    if data[i][len(data[i])-position_brackets] == ")":
+                        count -= 1
+                        position_brackets += 1
+                        continue
+                    break
                 if count == 0:
                     finish = i
-                    data[i] = data[i][:len(data[i])-1]
+                    data[i] = data[i][:len(data[i]) - 1]
+                    
             if count == 0 and flag:
                 data[start] = eval_expr(data[start:finish+1])
                 k = len(data[start:finish])
+                i -= k
                 while k > 0:
                     del data[start + 1]
                     k -= 1
         i += 1
 
-    if not flag:
-        return calculate_result(data)
-    elif len(data) == 1:
-        return data
-    else:
-        return calculate_result(data)
+    if len(data) == 1:
+        return data[0]
+    return calculate_result(data)
 
 
 def main():
