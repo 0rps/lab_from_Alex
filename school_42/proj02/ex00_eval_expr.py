@@ -41,7 +41,6 @@ def calculate_result(data):
 def eval_expr(data):
     operators = "+-*/%"
     i, start, finish, count = 0, 0, 0, 0
-    flag = False
     if data[0] == "-":
         data[0] = data[0] + data[1]
         del data[1]
@@ -49,7 +48,6 @@ def eval_expr(data):
         if not is_number(data[i]) and data[i] not in operators:
             if data[i][0] == "(":
                 position_brackets = 0
-                flag = True
                 if count == 0:
                     start = i
                     data[i] = data[i][1:]
@@ -73,7 +71,7 @@ def eval_expr(data):
                     finish = i
                     data[i] = data[i][:len(data[i]) - 1]
                     
-            if count == 0 and flag:
+            if count == 0 and finish != 0:
                 data[start] = eval_expr(data[start:finish+1])
                 k = len(data[start:finish])
                 i -= k
@@ -89,7 +87,7 @@ def eval_expr(data):
 
 def main():
     while True:
-        data = input("Enter arithmetic expression: ").split()     # test 1 * 5 / 2 + (21 % 6 * 3 + 100 - (5 * 3 / 5 * 3 + 41) - 2) + 2
+        data = input("Enter arithmetic expression: ").split()
         if len(data) == 0:
             print("Error. Empty line. Try again.")
             continue
