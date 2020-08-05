@@ -6,40 +6,22 @@
 
 
 def match(s1, s2):
-    i_s1 = 0
-    j_s2 = 0
-    flag = False
-    while i_s1 < len(s1) and j_s2 < len(s2):
-        if s1[i_s1] == s2[j_s2]:
-            i_s1 += 1
-            j_s2 += 1
-        else:
-            if s2[j_s2] != "*":
-                return 0
-            else:
-                flag = True
-                if j_s2+1 >= len(s2):
-                    return 1
-                else:
-                    j_s2 += 1
-                    i_s1 += 1
-                    while i_s1 < len(s1):
-                        if i_s1 == len(s1)-1 and s1[i_s1] != s2[j_s2]:
-                            return 0
-                        elif s1[i_s1] != s2[j_s2]:
-                            i_s1 += 1
-                            continue
-                        break
-
-    if len(s1) == len(s2) or flag:
+    if s2 == "*" or s1 == s2:
         return 1
+    elif s1[0] != s2[0] and s2[0] != "*":
+        return 0
+    elif s1[0] == s2[0]:
+        return match(s1[1:], s2[1:])
+    else:
+        for i in range(len(s1) + 1):
+            if match(s1[i:], s2[1:]) == 1:
+                return 1
     return 0
 
 
 def main():
     s1 = input("Enter s1: ")
     s2 = input("Enter s2: ")
-
     print(match(s1, s2))
 
 
