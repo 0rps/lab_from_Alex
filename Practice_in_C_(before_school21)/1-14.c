@@ -46,5 +46,8 @@ int main(void){
 
 	printf("Count: %d \nString: %s \n", result_count, result_string);
 	
+	free(result_string);
+	free(memory);
+	
 	return 0;
 }
