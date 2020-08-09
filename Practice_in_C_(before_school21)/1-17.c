@@ -34,7 +34,6 @@ int main(){
 	string = (char *)malloc(sizeof(char)*max_count);
 	
 	char symbol = 0;
-	count = 0;
 	while (symbol != '\n') {
 		symbol = getc(stdin);
 		string[count] = symbol;
