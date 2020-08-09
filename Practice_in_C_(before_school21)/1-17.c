@@ -26,7 +26,7 @@ char * reverse(char * s) {
 }
 
 
-int main(void){
+int main(){
 	
 	int count = 0;
 	char * string;
@@ -59,40 +59,4 @@ int main(void){
 	free(string);
 
 	return 0;
-}
-
-	
-	int count = 0;
-	char * string;
-	char * result;
-	int max_count = 5;
-	string = (char *)malloc(sizeof(char)*max_count);
-	
-	char symbol = 0;
-	count = 0;
-	while (symbol != '\n') {
-		symbol = getc(stdin);
-		string[count] = symbol;
-		count += 1;
-		
-		if (count == max_count) {
-			max_count *= 2;
-			char * string_new;
-			string_new = (char *)malloc(sizeof(char)*max_count);
-			
-			for (int i = 0; i<count; ++i){
-				string_new[i] = string[i];
-			}
-			
-			free(string);
-			string = string_new;
-		}
-	}
-	
-	result = reverse(string);
-	printf("Reverse string: %s", result);
-	
-	free(string);
-
-	return;
 }

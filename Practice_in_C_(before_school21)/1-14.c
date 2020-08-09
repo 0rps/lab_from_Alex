@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-int main(void){
+int main(){
 
 	int result_count, count = 0;
 	int max_count = 5;
